@@ -1,6 +1,6 @@
 <?php
 class Thread extends AppModel
-	{/*
+	{
 		public $validation = array(
 			'title' => array(
 				'length' => array(
@@ -13,7 +13,7 @@ class Thread extends AppModel
 			$db = DB::conn();
 			$row = $db->rows('SELECT * FROM thread WHERE id = ?', array($id));
 			return new self($row);
-		}*/
+		}
 
 		public static function getAll(){
 			$threads = array();
@@ -26,7 +26,7 @@ class Thread extends AppModel
 		
 			return $threads;
 		}
-/*
+
 		public function getComments(){
 			$comments = array();
 			$db = DB::conn();
@@ -53,7 +53,7 @@ class Thread extends AppModel
 			$this->validate();
 			$comment->validate();
 			if ($this->hasError() || $comment->hasError()) {
-				throw new ValidationException('invalid thread or comment');
+				throw new Exception('invalid thread or comment');
 			}
 
 			$db = DB::conn();
@@ -63,6 +63,6 @@ class Thread extends AppModel
 			// write first comment at the same time
 			$this->write($comment);
 			$db->commit();
-		}*/
+		}
 	}//end of class
 ?>

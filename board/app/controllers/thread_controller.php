@@ -7,24 +7,13 @@ class ThreadController extends AppController{
 	}
 
 	public function view(){
-		$thread = Thread::get(Param::get('thread_id'));
+		$parasaid = Param::get('thread_id');
+		$thread = Thread::get($parasaid);
+		$thread->id=$parasaid;
 		$comments = $thread->getComments();
 		$this->set(get_defined_vars());
 	}
 	
-	public function getComments(){
-		$comments = array();
-		$db = DB::conn();
-		$rows = $db->rows(
-		'SELECT * FROM comment WHERE thread_id = ? ORDER BY created ASC',
-		array($this->id)
-		);
-
-		foreach ($rows as $row) {
-		$comments[] = new Comment($row);
-		}
-		return $comments;
-	}
 	public function write(){
 		$thread = Thread::get(Param::get('thread_id'));
 		$comment = new Comment;
@@ -66,7 +55,7 @@ class ThreadController extends AppController{
 				try {
 				$thread->create($comment);
 				}
-				catch (ValidationException $e) {
+				catch (Exception $e) {
 				$page = 'create';
 				}break;
 
