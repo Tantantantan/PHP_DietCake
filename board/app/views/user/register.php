@@ -2,30 +2,34 @@
 <h2>User Registration</h2>
 </div>
 <?php if ($user->hasError()): ?>	 
-Validation Error!
+<font size="3" color="red">Validation Error!</font>
 <div align="center">
 		<?php if (!empty($user->validation_errors['nickname']['format'])): ?>
-    	Nick name must contain letters only.
+    	<font size="3" color="red">Nick name must contain letters only.</font><br/>
   		<?php endif ?>
 
 		<?php if (!empty($user->validation_errors['email']['format'])): ?>
-		Invalid Email Address.
+		<font size="3" color="red">Invalid Email Address.</font><br/>
 		<?php endif?>
 
 		<?php if (!empty($user->validation_errors['username']['length'])): ?>
-		User Name must be between:
+		<font size="3" color="red">User Name must be between:
 		<?php eh($user->validation['username']['length'][1]) ?> and
 		<?php eh($user->validation['username']['length'][2]) ?> characters in length.
+		</font><br/>
 		<?php endif?>
 
 		<?php if (!empty($user->validation_errors['password']['length'])): ?>
-		Password must be between:
+		<font size="3" color="red">User Name must be between:Password must be between:
 		<?php eh($user->validation['password']['length'][1]) ?> and
 		<?php eh($user->validation['password']['length'][2]) ?> characters in length.
+		</font><br/>
 		<?php endif?>
 
 		<?php if (!empty($user->validation_errors['confpass']['match'])): ?>
+		<font size="3" color="red">
 		Password does not match.
+		</font><br/>
 		<?php endif ?>
 </div>
 <?php endif ?>

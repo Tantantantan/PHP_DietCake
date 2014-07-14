@@ -11,12 +11,14 @@ require_once APP_DIR.'app_exception.php';
 // helpers
 require_once HELPERS_DIR.'html_helper.php';
 require_once HELPERS_DIR.'validation_helper.php';
+
+//library
+require_once LIB_DIR.'pagination.php';
+
 // config
 require_once CONFIG_DIR.'log.php';
 require_once CONFIG_DIR.'router.php';
 require_once CONFIG_DIR.'database.php';
-
-
 
 spl_autoload_register(function($name) {
     $filename = Inflector::underscore($name) . '.php';

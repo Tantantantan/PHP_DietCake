@@ -26,7 +26,10 @@ class Thread extends AppModel
             $threads[] = new Thread($row);
         }
 
-        return $threads;
+        $limit = Pagination::max_rows;
+        $offset = ($page - 1) * Pagination::max_rows;
+
+        return array_slice($threads, $offset, $limit);
     }
 
     public function getComments()
@@ -72,4 +75,3 @@ class Thread extends AppModel
         $db->query('INSERT INTO comment SET thread_id = ?, username = ?, body = ?, created = NOW()', array($this->id, $comment->username, $comment->body));
     }
 }
-?>

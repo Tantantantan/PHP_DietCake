@@ -39,12 +39,12 @@ class UserController extends AppController {
                 $user->username = Param::get('username');
                 $user->password = sha1(Param::get('password'));
                 try {
-                $account = $user->check_login($user->username, $user->password);
-                $_SESSION['id'] = $account['id'];
-                $_SESSION['username'] = $account['username'];
-                $_SESSION['nickname'] = $account['nickname'];
+                    $account = $user->check_login();
+                    $_SESSION['id'] = $account->id;
+                    $_SESSION['username'] = $account->username;
+                    $_SESSION['nickname'] = $account->nickname;
                 } catch(UserNotFoundException $e) {
-                $page = 'login';
+                echo "error message";
                 }
                 break;
 
@@ -59,6 +59,18 @@ class UserController extends AppController {
     public function logout() {
         session_unset();
         session_destroy();
+    }
+
+    public function threads()
+    {
+        $page = Pagination::setcurrentPage(Param::get('page'));
+        $user_id = Param::get('user_id');
+        $threads = User::getThreads($user_id, $page);
+          
+        Pagination::$pagination_for = 'threads';
+        $page_links = Pagination::buildPages($page, User::$total_rows);
+        
+        $this->set(get_defined_vars());
     }
 }
 ?>

@@ -8,7 +8,7 @@ class User extends AppModel{
                 'check_email',
             ),
         ),
-##MIN and MAX values are defined in core.php
+##MIN and MAX values are defined in core_development.php
         'nickname' => array(
             'length' => array(
                 'check_length', MIN_USER_LENGTH, MAX_USER_LENGTH
@@ -56,15 +56,37 @@ class User extends AppModel{
 
     }//end of register()
 
-    public function check_login($username, $password){
+    public function check_login(){
+
         $db = DB::conn();//searcing in database
         $row = $db->row('SELECT id, nickname, username FROM user WHERE username = ? AND password = ?',
-            array($username, $password));
+            array($this->username, $this->password)
+            );
 
         if (!$row) {
             throw new UserNotFoundException('user not found');
         }
-        return $row;
+        return new self ($row);
+    }//end of check_login
+
+    public static function getThreads($id, $page)
+    {
+        $query = "SELECT t.id, t.title, u.username, t.created FROM thread t
+                   INNER JOIN user u ON t.user_id = u.id WHERE t.user_id = ?";
+        
+        $db = DB::conn();
+        $rows = $db->rows($query,array($id));
+        self::$total_rows = count($rows);
+
+        $threads = array();
+        foreach ($rows as $row) {
+            $threads[] = new self($row);
+        }
+
+        $limit = Pagination::max_rows;
+        $offset = ($page - 1) * $limit;
+
+        return array_slice($threads, $offset, $limit);
     }
 }
 ?>
