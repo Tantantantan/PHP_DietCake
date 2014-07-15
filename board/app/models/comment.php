@@ -1,6 +1,6 @@
 <?php
-class Comment extends AppModel
-{
+class Comment extends AppModel{
+
     public $validation = array(
         'username' => array(
             'length' => array(
@@ -12,5 +12,5 @@ class Comment extends AppModel
                 'validate_between', 1, 200,
             ),
         ),
-    );
+    );//end of array
 }

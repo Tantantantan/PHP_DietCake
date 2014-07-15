@@ -5,8 +5,6 @@ class CommentController extends Appcontroller{
         $comments = $thread->getComments();
 
         $this->set(get_defined_vars());
-
-        //PAGINATION LINK
     }
 
     public function write(){
@@ -30,7 +28,6 @@ class CommentController extends Appcontroller{
             throw new NotFoundException("{$page} is not found");
             break;
         }
-
         $this->set(get_defined_vars());
         $this->render($page);
     }

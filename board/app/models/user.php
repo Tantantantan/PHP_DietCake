@@ -8,7 +8,7 @@ class User extends AppModel{
                 'check_email',
             ),
         ),
-##MIN and MAX values are defined in core_development.php
+##MIN and MAX values are defined in core.php
         'nickname' => array(
             'length' => array(
                 'check_length', MIN_USER_LENGTH, MAX_USER_LENGTH
