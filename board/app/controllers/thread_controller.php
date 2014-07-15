@@ -28,11 +28,11 @@ class ThreadController extends AppController
             $comment->username = Param::get('username');
             $comment->body = Param::get('body');
 
-                try {
+            try {
                 $thread->create($comment);
-                } catch (ValidationException $e) {
+            } catch (ValidationException $e) {
                 $page = 'create';
-                }
+            }
                 
             break;
             default:

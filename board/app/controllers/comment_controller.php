@@ -28,11 +28,11 @@ class CommentController extends Appcontroller
             $comment->username = Param::get('username');
             $comment->body = Param::get('body');
             
-                try {
+            try {
                 $thread->write($comment);
-                } catch (ValidationException $e) {
+            } catch (ValidationException $e) {
                 $page = 'write';
-                }
+            }
             
             break;
         default:
