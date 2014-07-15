@@ -3,9 +3,9 @@ class ThreadController extends AppController
 {
     public function index()
     {
-        $threads = Thread::getAll();
-
         $page_links = Pagination::buildPages(Param::get('page'), Thread::num_Threads());
+        
+        $threads = Thread::getAll();
 
         $this->set(get_defined_vars());
     }
@@ -75,3 +75,4 @@ class ThreadController extends AppController
         $this->render($page);
     }
 }
+?>

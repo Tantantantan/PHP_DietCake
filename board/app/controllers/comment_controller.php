@@ -1,39 +1,33 @@
 <?php
-class CommentController extends AppController
-{
-
-    public function view()
-    {
+class CommentController extends Appcontroller{
+    public function view(){
         $thread = Thread::get(Param::get('thread_id'));
-        $comments = array();
+        $comments = $thread->getComments();
 
-        //Thread must exist in order to view its comments
-        if ($thread) {
-            $comments = Comment::get($thread->id);
-        }
-        
         $this->set(get_defined_vars());
+
+        //PAGINATION LINK
     }
 
-      public function write()
-    {
+    public function write(){
         $thread = Thread::get(Param::get('thread_id'));
         $comment = new Comment;
-        
-        $page = Param::get('next_page', 'write');
+        $page = Param::get('page_next', 'write');
+
         switch ($page) {
         case 'write':
             break;
         case 'write_end':
+            $comment->username = Param::get('username');
             $comment->body = Param::get('body');
             try {
-                $comment->write($thread->id);
+                $thread->write($comment);
             } catch (ValidationException $e) {
                 $page = 'write';
             }
             break;
         default:
-            throw new NotFoundExeption("{$page} is not found");
+            throw new NotFoundException("{$page} is not found");
             break;
         }
 
@@ -41,3 +35,4 @@ class CommentController extends AppController
         $this->render($page);
     }
 }
+?>
