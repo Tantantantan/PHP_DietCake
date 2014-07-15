@@ -5,6 +5,8 @@ class ThreadController extends AppController
     {
         $threads = Thread::getAll();
 
+        $page_links = Pagination::buildPages(Param::get('page'), Thread::num_Threads());
+
         $this->set(get_defined_vars());
     }
 
@@ -42,6 +44,8 @@ class ThreadController extends AppController
         $comments = $thread->getComments();
 
         $this->set(get_defined_vars());
+
+        //PAGINATION LINK
     }
 
     public function write()

@@ -61,16 +61,5 @@ class UserController extends AppController {
         session_destroy();
     }
 
-    public function threads()
-    {
-        $page = Pagination::setcurrentPage(Param::get('page'));
-        $user_id = Param::get('user_id');
-        $threads = User::getThreads($user_id, $page);
-          
-        Pagination::$pagination_for = 'threads';
-        $page_links = Pagination::buildPages($page, User::$total_rows);
-        
-        $this->set(get_defined_vars());
-    }
 }
 ?>

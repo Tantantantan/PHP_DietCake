@@ -19,17 +19,14 @@ class Thread extends AppModel
     public static function getAll()
     {
         $threads = array();
-
+        $limit = 'LIMIT ' . (Pagination::$current_page - 1) * Pagination::MAX_ROWS . ',' . Pagination::MAX_ROWS;
         $db = DB::conn();
-        $rows = $db->rows('SELECT * FROM thread');
+        $rows = $db->rows("SELECT * FROM thread {$limit}");
         foreach ($rows as $row) {
             $threads[] = new Thread($row);
         }
 
-        $limit = Pagination::max_rows;
-        $offset = ($page - 1) * Pagination::max_rows;
-
-        return array_slice($threads, $offset, $limit);
+        return $threads;
     }
 
     public function getComments()
@@ -73,5 +70,11 @@ class Thread extends AppModel
 
         $db = DB::conn();
         $db->query('INSERT INTO comment SET thread_id = ?, username = ?, body = ?, created = NOW()', array($this->id, $comment->username, $comment->body));
+    }
+
+    public static function num_Threads(){
+        $db = DB::conn();
+        $thread_count = $db->value('SELECT COUNT(id) FROM thread');
+        return $thread_count;
     }
 }

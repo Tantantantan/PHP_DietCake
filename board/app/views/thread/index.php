@@ -7,3 +7,5 @@
 </ul>
 
 <a class="btn btn-large btn-primary" href="<?php eh(url('thread/create')) ?>">Create</a>
+
+<?php echo $page_links ?>
