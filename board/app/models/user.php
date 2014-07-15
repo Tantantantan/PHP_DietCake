@@ -1,13 +1,13 @@
 <?php
-class User extends AppModel{
-
-##start of validating inputs from register
+class User extends AppModel
+{
     public $validation = array(
         'email' => array(
             'format' => array(
                 'check_email',
             ),
         ),
+        
 ##MIN and MAX values are defined in core.php
         'nickname' => array(
             'length' => array(
@@ -34,7 +34,8 @@ class User extends AppModel{
         ),
     );//end of $validation
 
-    public function register() {
+    public function register() 
+    {
         $this->validation['email']['format'][] = $this->email;
         $this->validation['nickname']['length'][] = $this->nickname;
         $this->validation['username']['length'][] = $this->username;
@@ -56,8 +57,8 @@ class User extends AppModel{
 
     }//end of register()
 
-    public function check_login(){
-
+    public function check_login()
+    {
         $db = DB::conn();//searcing in database
         $row = $db->row('SELECT id, nickname, username FROM user WHERE username = ? AND password = ?',
             array($this->username, $this->password)

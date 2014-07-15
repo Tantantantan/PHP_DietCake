@@ -1,11 +1,13 @@
 <?php
-class UserController extends AppController {
-    
-    public function register() {
+class UserController extends AppController 
+{    
+    public function register()
+    {
         $user = new User;
-        $page = Param::get('next_page','register');
+        $page = Param::get('next_page', 'register');
 
-        switch($page){
+        switch($page)
+        {
             case 'register':
                 break;
             case 'register_ok':
@@ -14,12 +16,14 @@ class UserController extends AppController {
                 $user->username = Param::get('username');
                 $user->password = Param::get('password');
                 $user->confpass = Param::get('confpass');
+                
                 try{
                 $user->register();
                 }catch (ValidationException $e){
                 $page = 'register';
-                }break;
-            
+                }
+
+                break;
             default:
                 throw new NotFoundException("{$page} not found");
                 break;
@@ -28,22 +32,26 @@ class UserController extends AppController {
         $this->render($page);
     }//end of register
 
-    public function login() {
+    public function login() 
+    {
         $user = new User;
         $page = Param::get('next_page', 'login');
 
-        switch ($page) {
+        switch ($page)
+        {
             case 'login':
                 break;
             case 'login_ok':
                 $user->username = Param::get('username');
                 $user->password = sha1(Param::get('password'));
+
                 try {
-                    $account = $user->check_login();
-                    $_SESSION['id'] = $account->id;
-                    $_SESSION['username'] = $account->username;
-                    $_SESSION['nickname'] = $account->nickname;
-                } catch(UserNotFoundException $e) {
+                $account = $user->check_login();
+                $_SESSION['id'] = $account->id;
+                $_SESSION['username'] = $account->username;
+                $_SESSION['nickname'] = $account->nickname;
+                } catch(UserNotFoundException $e){
+
                 echo "error message";
                 }
                 break;
@@ -56,10 +64,10 @@ class UserController extends AppController {
         $this->render($page);
     }//end of login
 
-    public function logout() {
+    public function logout()
+    {
         session_unset();
         session_destroy();
     }
-
 }
 ?>

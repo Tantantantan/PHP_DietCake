@@ -1,5 +1,6 @@
 <?php
-    function check_length($check,$min,$max){
+
+    function check_length($check, $min, $max){
         $n = mb_strlen($check);
         return $min <= $n && $n <= $max;
     }
@@ -10,13 +11,13 @@
     }
 
     function check_email($email){
-    	if(preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",$email)){
+        if(preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $email)){
             return true;
         }
         else {return false;}
     }
 
-    function validate_between($check,$min,$max){
+    function validate_between($check, $min, $max){
         $n = mb_strlen($check);
         return $min <= $n && $n <= $max;
     }
