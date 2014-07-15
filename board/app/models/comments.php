@@ -1,17 +1,17 @@
 <?php
-
-class Comment extends AppModel{
-
+class Comment extends AppModel
+{
     public $validation = array(
         'username' => array(
             'length' => array(
-                'validate_between', MIN_COM_USERNAME, MAX_COM_USERNAME,
+                'change_length', 1, 16,
             ),
         ),
         'body' => array(
             'length' => array(
-                'validate_between', MIN_COM_BODY, MAX_COM_BODY,
+                'change_length', 1, 200,
             ),
         ),
-    );//end of array
+    );
 }
+?>

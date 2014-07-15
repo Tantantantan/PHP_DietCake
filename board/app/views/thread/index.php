@@ -6,4 +6,8 @@
   <?php endforeach ?>
 </ul>
 
+<br/>
+<?php echo $page_links ?>
+<br/><br/>
 <a class="btn btn-large btn-primary" href="<?php eh(url('thread/create')) ?>">Create</a>
+>>>>>>> pagination
