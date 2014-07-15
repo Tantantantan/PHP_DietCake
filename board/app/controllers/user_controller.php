@@ -1,6 +1,9 @@
 <?php
 class UserController extends AppController 
-{    
+{   
+    /*
+     *Register a new user
+     */ 
     public function register()
     {
         $user = new User;
@@ -17,11 +20,11 @@ class UserController extends AppController
                 $user->password = Param::get('password');
                 $user->confpass = Param::get('confpass');
                 
-                try{
-                $user->register();
-                }catch (ValidationException $e){
-                $page = 'register';
-                }
+                    try{
+                    $user->register();
+                    }catch (ValidationException $e){
+                    $page = 'register';
+                    }
 
                 break;
             default:
@@ -30,8 +33,10 @@ class UserController extends AppController
         }//end of switch
         $this->set(get_defined_vars());
         $this->render($page);
-    }//end of register
-
+    }
+    /*
+     *Existing user login
+     */
     public function login() 
     {
         $user = new User;
@@ -45,12 +50,12 @@ class UserController extends AppController
                 $user->username = Param::get('username');
                 $user->password = sha1(Param::get('password'));
 
-                try {
-                $account = $user->check_login();
-                $_SESSION['id'] = $account->id;
-                $_SESSION['username'] = $account->username;
-                $_SESSION['nickname'] = $account->nickname;
-                } catch(UserNotFoundException $e){
+                    try {
+                    $account = $user->check_login();
+                    $_SESSION['id'] = $account->id;
+                    $_SESSION['username'] = $account->username;
+                    $_SESSION['nickname'] = $account->nickname;
+                    } catch(UserNotFoundException $e){
 
                 echo "error message";
                 }
@@ -62,8 +67,10 @@ class UserController extends AppController
         }//end of switch
         $this->set(get_defined_vars());
         $this->render($page);
-    }//end of login
-
+    }
+    /*
+     *User Logout
+     */
     public function logout()
     {
         session_unset();

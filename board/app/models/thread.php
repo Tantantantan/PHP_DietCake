@@ -8,7 +8,11 @@ class Thread extends AppModel
             ),
         ),
     );
-
+    /**
+     *Get a Thread
+     *@param $id
+     *@return $row
+     */
     public static function get($id)
     {
         $db = DB::conn();
@@ -16,7 +20,10 @@ class Thread extends AppModel
 
         return new self($row);
     }
-
+    /**
+     *Get all Threads
+     *@return Threads
+     */
     public static function getAll()
     {
         $threads = array();
@@ -29,19 +36,10 @@ class Thread extends AppModel
         }
         return $threads;
     }
-
-    public function getComments()
-    {
-        $comments = array();
-        $db = DB::conn();
-        $rows = $db->rows('SELECT * FROM comment WHERE thread_id = ? ORDER BY created ASC', array($this->id));
-
-        foreach ($rows as $row) {
-            $comments[] = new Comment($row);
-        }
-        return $comments;
-    }
-
+    /**
+    *Create comments
+    *@param $comment
+    */
     public function create(Comment $comment)
     {
         $this->validate();
@@ -60,7 +58,24 @@ class Thread extends AppModel
         $this->write($comment);
         $db->commit();
     }
+    /*
+    *get Comments from database
+    */
+     public function getComments()
+    {
+        $comments = array();
+        $db = DB::conn();
+        $rows = $db->rows('SELECT * FROM comment WHERE thread_id = ? ORDER BY created ASC', array($this->id));
 
+        foreach ($rows as $row) {
+            $comments[] = new Comment($row);
+        }
+        return $comments;
+    }
+    /**
+     *write comment to database
+     *@param $comment
+     */
     public function write(Comment $comment)
     {
         if (!$comment->validate()) {
@@ -68,9 +83,12 @@ class Thread extends AppModel
         }
 
         $db = DB::conn();
-        $db->query('INSERT INTO comment SET thread_id = ?, username = ?, body = ?, created = NOW()', array($this->id, $comment->username, $comment->body));
+        $db->query('INSERT INTO comment SET thread_id = ?, username = ?, body = ?, created = NOW()', 
+            array($this->id, $comment->username, $comment->body));
     }
-
+    /*
+     *compute for the number of Threads
+     */
     public static function numThreads()
     {
         $db = DB::conn();

@@ -1,5 +1,4 @@
 <?php
-
 class Comment extends AppModel{
 
     public $validation = array(
@@ -13,5 +12,7 @@ class Comment extends AppModel{
                 'validate_between', MIN_COM_BODY, MAX_COM_BODY,
             ),
         ),
-    );//end of array
+    );
+    
 }
+?>

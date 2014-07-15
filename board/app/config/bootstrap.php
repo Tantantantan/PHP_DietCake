@@ -12,7 +12,7 @@ require_once APP_DIR.'app_exception.php';
 require_once LIB_DIR.'pagination.php';
 
 // vendor
-require_once VENDOR_DIR.'SimpleDBI/SimpleDBI.php';
+require_once VENDOR_DIR.'SimpleDBI/src/SimpleDBI.php';
 
 // helpers
 require_once HELPERS_DIR.'html_helper.php';
