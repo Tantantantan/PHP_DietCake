@@ -29,11 +29,12 @@ class Pagination{
 
         $page_links = '';	//page link initializtion
         if (is_integer(self::$current_page)){
+            $current_page = self::$current_page;
+        }
         	$previous_page = self::$current_page - 1;
         	$next_page = self::$current_page + 1;
         	$left_pagenum = self::$current_page - self::PAGE_LIMITS;
         	$right_pagenum = self::$current_page + self::PAGE_LIMITS;
-        }
 
         if ($numrows != 1){
         	$page_links .= self::PreviousLinks(self::$current_page, $previous_page);
