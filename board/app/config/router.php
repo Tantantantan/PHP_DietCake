@@ -43,3 +43,4 @@ function url($url = '', $params = array())
 
     return $url;
 }
+?>

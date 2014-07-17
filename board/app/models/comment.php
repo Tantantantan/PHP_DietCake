@@ -1,6 +1,6 @@
 <?php
-class Comment extends AppModel{
-
+class Comment extends AppModel
+{
     public $validation = array(
         'username' => array(
             'length' => array(
@@ -13,7 +13,6 @@ class Comment extends AppModel{
             ),
         ),
     );
-    
     /**
      * Get all comments of a thread from DB
      * @param $id
@@ -37,7 +36,6 @@ class Comment extends AppModel{
 
         return $comments;
     }
-
     /**
      * Insert comment to DB
      * @param $id

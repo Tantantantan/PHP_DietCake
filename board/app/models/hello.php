@@ -1,7 +1,8 @@
 <?php
 class Hello extends AppModel
 {	
-    public static function getMessage(){
+    public static function getMessage()
+    {
         return 'hello world!';
     }
 }

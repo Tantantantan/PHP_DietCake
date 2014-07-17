@@ -46,9 +46,9 @@ class User extends AppModel
         $this->validation['password']['length'][] = $this->password;
         $this->validation['confpass']['match'][] = $this->confpass;
 
-        if(!$this->validate()) {
+        if(!$this->validate()){
             throw new ValidationException("invalid inputs");
-        }else {
+        }else{
             $input = array(
             'nickname' => $this->nickname,
             'username' => $this->username, 
@@ -58,7 +58,6 @@ class User extends AppModel
         }
         $db = DB::conn();//storing to database    
         $db->insert('user', $input);
-
     }
     /**
      *Log in and get if existing in database
@@ -71,7 +70,7 @@ class User extends AppModel
             array($this->username, $this->password)
             );
 
-        if (!$row) {
+        if (!$row){
             throw new UserNotFoundException('user not found');
         }
         return new self ($row);

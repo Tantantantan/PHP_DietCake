@@ -34,7 +34,8 @@ class Thread extends AppModel
         $db = DB::conn();
         $rows = $db->rows("SELECT * FROM thread {$limit}");
 
-        foreach ($rows as $row) {
+        foreach ($rows as $row)
+        {
             $threads[] = new Thread($row);
         }
         return $threads;
