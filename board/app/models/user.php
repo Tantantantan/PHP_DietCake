@@ -38,7 +38,7 @@ class User extends AppModel
     /**
      *Get user Inputs
      */
-    public function register() 
+    public function register($user) 
     {
         $this->validation['email']['format'][] = $this->email;
         $this->validation['nickname']['length'][] = $this->nickname;
