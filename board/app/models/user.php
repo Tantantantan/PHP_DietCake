@@ -63,7 +63,7 @@ class User extends AppModel
      *Log in and get if existing in database
      *@return $row
      */
-    public function check_login()
+    public function checkLogin()
     {
         $db = DB::conn();//searcing in database
         $row = $db->row('SELECT id, nickname, username FROM user WHERE username = ? AND password = ?',

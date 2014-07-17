@@ -51,7 +51,7 @@ class UserController extends AppController
                 $user->password = sha1(Param::get('password'));
 
                 try {
-                    $account = $user->check_login();
+                    $account = $user->checkLogin();
                     $_SESSION['id'] = $account->id;
                     $_SESSION['username'] = $account->username;
                     $_SESSION['nickname'] = $account->nickname;
