@@ -42,8 +42,7 @@ class UserController extends AppController
         $user = new User;
         $page = Param::get('next_page', 'login');
 
-        switch ($page)
-        {
+        switch ($page){
             case 'login':
                 break;
             case 'login_ok':

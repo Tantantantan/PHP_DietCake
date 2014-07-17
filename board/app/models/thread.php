@@ -34,8 +34,7 @@ class Thread extends AppModel
         $db = DB::conn();
         $rows = $db->rows("SELECT * FROM thread {$limit}");
 
-        foreach ($rows as $row)
-        {
+        foreach ($rows as $row){
             $threads[] = new Thread($row);
         }
         return $threads;
@@ -71,7 +70,7 @@ class Thread extends AppModel
         $db = DB::conn();
         $rows = $db->rows('SELECT * FROM comment WHERE thread_id = ? ORDER BY created ASC', array($this->id));
 
-        foreach ($rows as $row) {
+        foreach ($rows as $row){
             $comments[] = new Comment($row);
         }
         return $comments;

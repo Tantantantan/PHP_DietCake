@@ -20,21 +20,21 @@ class ThreadController extends AppController
         $comment = new Comment;
         $page = Param::get('page_next', 'create');
 
-        switch ($page) {
+        switch ($page){
             case 'create':
-            break;
+                break;
             case 'create_end':
-            $thread->title = Param::get('title');
-            $comment->username = Param::get('username');
-            $comment->body = Param::get('body');
+                $thread->title = Param::get('title');
+                $comment->username = Param::get('username');
+                $comment->body = Param::get('body');
 
-            try {
-                $thread->create($comment);
-            } catch (ValidationException $e) {
-                $page = 'create';
-            }
+                try {
+                    $thread->create($comment);
+                } catch (ValidationException $e) {
+                    $page = 'create';
+                }
                 
-            break;
+                break;
             default:
                 throw new NotFoundException("{$page} is not found");
             break;
