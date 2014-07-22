@@ -26,4 +26,3 @@ define('MIN_COM_USERNAME', 1);
 define('MAX_COM_USERNAME', 16);
 define('MIN_COM_BODY', 1);
 define('MAX_COM_BODY', 200);
-?>
