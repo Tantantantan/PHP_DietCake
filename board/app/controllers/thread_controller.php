@@ -75,4 +75,3 @@ class ThreadController extends AppController
         $this->render($page);
     }
 }
-?>
