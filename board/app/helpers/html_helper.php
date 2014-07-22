@@ -6,10 +6,10 @@ function eh($string)
     echo htmlspecialchars($string, ENT_QUOTES);
 }
 
-function readable_text($s)
+function readable_text($string)
 {
-    $s = htmlspecialchars($s, ENT_QUOTES);
-    $s = nl2br($s);
-    return $s;
+    $string = htmlspecialchars($string, ENT_QUOTES);
+    $string = nl2br($string);
+    return $string;
 }
 ?>
