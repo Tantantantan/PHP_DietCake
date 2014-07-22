@@ -4,7 +4,7 @@ class Thread extends AppModel
     public $validation = array(
         'title' => array(
             'length' => array(
-                'validate_between', MIN_THREAD_LENGTH, MAX_THREAD_LENGTH,
+                'validate_length', MIN_THREAD_LENGTH, MAX_THREAD_LENGTH,
             ),
         ),
     );
