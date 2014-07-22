@@ -85,7 +85,7 @@ class User extends AppModel
 
         $threads = array();
         foreach ($rows as $row) {
-            $threads[] = new self($row);
+            $threads[] = new Thread($row);
         }
 
         $limit = Pagination::MAX_ROWS;
