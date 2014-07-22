@@ -29,15 +29,15 @@ class CommentController extends Appcontroller
             
         try {
             $thread->write($comment);
-        }catch (ValidationException $e) {
+        } catch (ValidationException $e) {
             $page = 'write';
         }
-            break;
-            
+        break;
         default:
             throw new NotFoundException("{$page} is not found");
             break;
         }
+        
         $this->set(get_defined_vars());
         $this->render($page);
     }
