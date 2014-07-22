@@ -7,7 +7,7 @@ class Pagination{
     public static $current_page = 1;
     /**
      * set last page of threads
-     * @param total rows
+     * @param total_rows
      * @return int of page
      */
     public static function setEndPage($total_rows)
@@ -54,7 +54,7 @@ class Pagination{
         return $page_links;
     }
     /**
-     *Previous Links
+     *create Previous Links
      * @param $page_number, $previous_page
      * @return $previous_page
      */
