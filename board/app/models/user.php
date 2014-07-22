@@ -94,4 +94,3 @@ class User extends AppModel
         return array_slice($threads, $offset, $limit);
     }
 }
-?>
