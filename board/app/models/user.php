@@ -71,7 +71,7 @@ class User extends AppModel
         if (!$row) {
             throw new UserNotFoundException('user not found');
         }
-        return new self ($row);
+        return self ($row);
     }
     /**
      *get Threads from database
