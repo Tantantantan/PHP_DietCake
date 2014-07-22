@@ -8,16 +8,21 @@ class UserController extends AppController
     {
         $user = new User;
         $page = Param::get('next_page', 'register');
+        $email = Param::get('email');
+        $nickname = Param::get('nickname');
+        $username = Param::get('username');
+        $password = Param::get('password');
+        $confpass = Param::get('confpass');
 
         switch($page) {
             case 'register':
                 break;
             case 'register_ok':
-                $user->email    = Param::get('email');
-                $user->nickname = Param::get('nickname');
-                $user->username = Param::get('username');
-                $user->password = Param::get('password');
-                $user->confpass = Param::get('confpass');
+                $user->email    = $email;
+                $user->nickname = $nickname;
+                $user->username = $username;
+                $user->password = $password;
+                $user->confpass = $confpass;
 
                 try{
                     $user->register();
