@@ -7,7 +7,7 @@ class User extends AppModel
     public $validation = array(
         'email' => array(
             'format' => array(
-                'check_email',
+                'validate_email',
             ),
         ),
         
@@ -31,7 +31,7 @@ class User extends AppModel
 
         'confpass' => array(
             'match' => array(
-                'check_password',
+                'validate_password',
             ),
         ),
     );
