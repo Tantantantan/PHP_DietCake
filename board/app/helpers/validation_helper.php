@@ -16,6 +16,6 @@
         if(preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $email)){
             return true;
         }
-        else {return false;}
+        return false;
     }
 ?>
