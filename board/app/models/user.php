@@ -81,7 +81,7 @@ class User extends AppModel
                    INNER JOIN user u ON t.user_id = u.id WHERE t.user_id = ?";
         
         $db = DB::conn();
-        $rows = $db->rows($query,array($id));
+        $rows = $db->rows($query, array($id));
         self::$total_rows = count($rows);
 
         $threads = array();
