@@ -22,7 +22,7 @@ class Pagination
      * @param $total_rows
      * @return string
      */
-    public static function buildPages($page_number,$total_rows)
+    public static function buildPages($page_number, $total_rows)
     {
         $last_page = self::setEndPage($total_rows);
 
