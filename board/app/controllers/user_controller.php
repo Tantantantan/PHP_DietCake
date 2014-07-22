@@ -76,4 +76,3 @@ class UserController extends AppController
         session_destroy();
     }
 }
-?>
