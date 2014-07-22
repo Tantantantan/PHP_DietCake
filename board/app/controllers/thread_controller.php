@@ -33,7 +33,6 @@ class ThreadController extends AppController
             } catch (ValidationException $e){
                 $page = 'create';
             }
-                break;
 
         default:
             throw new NotFoundException("{$page} is not found");
@@ -73,7 +72,6 @@ class ThreadController extends AppController
             } catch (ValidationException $e) {
                 $page = 'write';
             }
-                break;
             
         default:
             throw new NotFoundException("{$page} is not found");
