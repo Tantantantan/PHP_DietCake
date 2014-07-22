@@ -97,4 +97,3 @@ class Thread extends AppModel
         return $thread_count;
     }
 }
-?>
