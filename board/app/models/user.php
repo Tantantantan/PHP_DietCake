@@ -54,7 +54,6 @@ class User extends AppModel
         }
         $db = DB::conn();//storing to database    
         $db->insert('user', $input);
-
     }
     /**
      *Log in and get if existing in database
