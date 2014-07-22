@@ -40,21 +40,17 @@ class User extends AppModel
      */
     public function register() 
     {
-        $this->validation['email']['format'][] = $this->email;
-        $this->validation['nickname']['length'][] = $this->nickname;
-        $this->validation['username']['length'][] = $this->username;
-        $this->validation['password']['length'][] = $this->password;
-        $this->validation['confpass']['match'][] = $this->confpass;
-
         if(!$this->validate()) {
             throw new ValidationException("invalid inputs");
-        }else {
-            $input = array(
+        }
+
+        $input = array(
             'nickname' => $this->nickname,
             'username' => $this->username, 
             'password' => sha1($this->password), //sha1 mysql encription
             'email' => $this->email,
-            );
+        );
+        
         }
         $db = DB::conn();//storing to database    
         $db->insert('user', $input);
