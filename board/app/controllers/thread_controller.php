@@ -7,7 +7,7 @@ class ThreadController extends AppController
     public function index()
     {
         $page_links = Pagination::buildPages(Param::get('page'), Thread::getNumberOfThreads());
-        $threads = Thread::getAllThreads();
+        $threads = Thread::getAll();
         
         $this->set(get_defined_vars());
     }
