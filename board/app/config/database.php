@@ -42,4 +42,3 @@ class DB extends SimpleDBI
         Log::debug(sprintf("sql\t%f\t%d:(%s) %s; (%s)", $this->getLastExecTime(), $num_query++, $host, $sql, implode(', ', $params)), 'sql');
     }
 }
-?>
