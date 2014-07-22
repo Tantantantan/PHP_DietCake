@@ -38,4 +38,3 @@ class CommentController extends Appcontroller
         $this->render($page);
     }
 }
-?>
