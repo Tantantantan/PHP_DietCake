@@ -12,4 +12,3 @@ function readable_text($string)
     $string = nl2br($string);
     return $string;
 }
-?>
