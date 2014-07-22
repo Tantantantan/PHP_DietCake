@@ -132,4 +132,3 @@ class Log
         return ob_get_clean();
     }
 }
-?>
