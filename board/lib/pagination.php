@@ -1,6 +1,6 @@
 <?php
-class Pagination{
-
+class Pagination
+{
     const MAX_ROWS = 3;     
     const PAGE_LIMITS = 3;
     //current page initialization at first page
