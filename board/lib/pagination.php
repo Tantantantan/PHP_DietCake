@@ -5,7 +5,7 @@ class Pagination{
     const PAGE_LIMITS = 3;      //number of link pages
     public static $current_page = 1;
     
-    public static function setendpage($total_rows){
+    public static function setEndPage($total_rows){
         if ($total_rows <= self::MAX_ROWS) {
             return 1;
         }
@@ -14,7 +14,7 @@ class Pagination{
 
     public static function buildPages($page_number,$total_rows){
 
-        $last_page = self::setendpage($total_rows);
+        $last_page = self::setEndPage($total_rows);
 
         if (isset($page_number)) {
            	self::$current_page = preg_replace('/[^0-9]/', '', $page_number);

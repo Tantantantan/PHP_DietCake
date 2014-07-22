@@ -20,23 +20,23 @@ class CommentController extends Appcontroller
         $comment = new Comment;
         $page = Param::get('page_next', 'write');
 
-        switch ($page){
-            case 'write':
-                break;
-            case 'write_end':
-                $comment->username = Param::get('username');
-                $comment->body = Param::get('body');
+        switch ($page) {
+        case 'write':
+            break;
+        case 'write_end':
+            $comment->username = Param::get('username');
+            $comment->body = Param::get('body');
             
-                try {
-                    $thread->write($comment);
-                } catch (ValidationException $e) {
-                    $page = 'write';
-                }
+        try {
+            $thread->write($comment);
+        }catch (ValidationException $e) {
+            $page = 'write';
+        }
+            break;
             
-                break;
-            default:
-                throw new NotFoundException("{$page} is not found");
-                break;
+        default:
+            throw new NotFoundException("{$page} is not found");
+            break;
         }
         $this->set(get_defined_vars());
         $this->render($page);

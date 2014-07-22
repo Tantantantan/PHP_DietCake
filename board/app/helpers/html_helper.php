@@ -2,10 +2,8 @@
 
 function eh($string)
 {
-    if (!isset($string)) {
-    	return;
-    	echo htmlspecialchars($string, ENT_QUOTES);
-    }
+    if (!isset($string)) return;
+    echo htmlspecialchars($string, ENT_QUOTES);
 }
 
 function readable_text($s)

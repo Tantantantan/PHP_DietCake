@@ -38,7 +38,7 @@ class User extends AppModel
     /**
      *Get user Inputs
      */
-    public function register($user) 
+    public function register() 
     {
         $this->validation['email']['format'][] = $this->email;
         $this->validation['nickname']['length'][] = $this->nickname;
@@ -46,9 +46,9 @@ class User extends AppModel
         $this->validation['password']['length'][] = $this->password;
         $this->validation['confpass']['match'][] = $this->confpass;
 
-        if(!$this->validate()){
+        if(!$this->validate()) {
             throw new ValidationException("invalid inputs");
-        }else{
+        }else {
             $input = array(
             'nickname' => $this->nickname,
             'username' => $this->username, 
@@ -58,6 +58,7 @@ class User extends AppModel
         }
         $db = DB::conn();//storing to database    
         $db->insert('user', $input);
+
     }
     /**
      *Log in and get if existing in database
@@ -66,14 +67,37 @@ class User extends AppModel
     public function checkLogin()
     {
         $db = DB::conn();//searcing in database
-        $row = $db->row('SELECT id, nickname, username FROM user WHERE username = ? AND password = ?',
+        $query = 'SELECT id, nickname, username FROM user WHERE username = ? AND password = ?'
+        $row = $db->row($query,
             array($this->username, $this->password)
             );
 
-        if (!$row){
+        if (!$row) {
             throw new UserNotFoundException('user not found');
         }
         return new self ($row);
+    }
+    /**
+     *get Threads from database
+     */
+    public static function getThreads($id, $page)
+    {
+        $query = "SELECT t.id, t.title, u.username, t.created FROM thread t
+                   INNER JOIN user u ON t.user_id = u.id WHERE t.user_id = ?";
+        
+        $db = DB::conn();
+        $rows = $db->rows($query,array($id));
+        self::$total_rows = count($rows);
+
+        $threads = array();
+        foreach ($rows as $row) {
+            $threads[] = new self($row);
+        }
+
+        $limit = Pagination::MAX_ROWS;
+        $offset = ($page - 1) * $limit;
+
+        return array_slice($threads, $offset, $limit);
     }
 }
 ?>

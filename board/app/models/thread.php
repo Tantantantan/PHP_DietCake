@@ -1,13 +1,10 @@
 <?php
 class Thread extends AppModel
 {
-    public $id;
-    public $title;
-    
     public $validation = array(
         'title' => array(
             'length' => array(
-                'check_length', MIN_THREAD_LENGTH, MAX_THREAD_LENGTH,
+                'validate_between', MIN_THREAD_LENGTH, MAX_THREAD_LENGTH,
             ),
         ),
     );
@@ -27,22 +24,37 @@ class Thread extends AppModel
      *Get all Threads
      *@return Threads
      */
-    public static function getAll()
+    public static function getAllThreads()
     {
         $threads = array();
         $limit = 'LIMIT ' . (Pagination::$current_page - 1) * Pagination::MAX_ROWS . ',' . Pagination::MAX_ROWS;
         $db = DB::conn();
         $rows = $db->rows("SELECT * FROM thread {$limit}");
 
-        foreach ($rows as $row){
+        foreach ($rows as $row) {
             $threads[] = new Thread($row);
         }
+
         return $threads;
     }
     /**
-    *Create comments
-    *@param $comment
-    */
+     *get Comments from database
+     */
+    public function getComments()
+    {
+        $comments = array();
+        $db = DB::conn();
+        $rows = $db->rows('SELECT * FROM comment WHERE thread_id = ? ORDER BY created ASC', array($this->id));
+
+        foreach ($rows as $row) {
+            $comments[] = new Comment($row);
+        }
+        return $comments;
+    }
+    /**
+     *Create comments
+     *@param $commentitch
+     */
     public function create(Comment $comment)
     {
         $this->validate();
@@ -59,21 +71,8 @@ class Thread extends AppModel
 
         // write first comment at the same time
         $this->write($comment);
-        $db->commit();
-    }
-    /*
-    *get Comments from database
-    */
-     public function getComments()
-    {
-        $comments = array();
-        $db = DB::conn();
-        $rows = $db->rows('SELECT * FROM comment WHERE thread_id = ? ORDER BY created ASC', array($this->id));
 
-        foreach ($rows as $row){
-            $comments[] = new Comment($row);
-        }
-        return $comments;
+        $db->commit();
     }
     /**
      *write comment to database
@@ -86,17 +85,15 @@ class Thread extends AppModel
         }
 
         $db = DB::conn();
-        $db->query('INSERT INTO comment SET thread_id = ?, username = ?, body = ?, created = NOW()', 
-            array($this->id, $comment->username, $comment->body));
+        $query_update = 'INSERT INTO comment SET thread_id = ?, username = ?, body = ?, created = NOW()';
+        $db->query($query_update, array($this->id, $comment->username, $comment->body));
     }
-    /*
-     *compute for the number of Threads
+    /**
+     *Get the number of Threads
      */
-    public static function numThreads()
-    {
+    public static function getNumberOfThreads(){
         $db = DB::conn();
         $thread_count = $db->value('SELECT COUNT(id) FROM thread');
-
         return $thread_count;
     }
 }

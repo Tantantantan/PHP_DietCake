@@ -1,5 +1,4 @@
 <?php
-
     function check_length($check, $min, $max)
     {
         $n = mb_strlen($check);
@@ -17,8 +16,6 @@
         if(preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $email)){
             return true;
         }
-        else{
-            return false;
-        }
+        else {return false;}
     }
 ?>

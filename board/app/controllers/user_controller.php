@@ -1,7 +1,7 @@
 <?php
 class UserController extends AppController 
-{   
-    /*
+{    
+    /**
      *Register a new user
      */ 
     public function register()
@@ -9,8 +9,7 @@ class UserController extends AppController
         $user = new User;
         $page = Param::get('next_page', 'register');
 
-        switch($page)
-        {
+        switch($page) {
             case 'register':
                 break;
             case 'register_ok':
@@ -19,14 +18,14 @@ class UserController extends AppController
                 $user->username = Param::get('username');
                 $user->password = Param::get('password');
                 $user->confpass = Param::get('confpass');
-                
+
             try{
                 $user->register();
-            }catch (ValidationException $e){
-                    $page = 'register';
+            } catch (ValidationException $e){
+                $page = 'register';
             }
-
                 break;
+            
             default:
                 throw new NotFoundException("{$page} not found");
                 break;
@@ -34,7 +33,7 @@ class UserController extends AppController
         $this->set(get_defined_vars());
         $this->render($page);
     }
-    /*
+    /**
      *Existing user login
      */
     public function login() 
@@ -42,7 +41,7 @@ class UserController extends AppController
         $user = new User;
         $page = Param::get('next_page', 'login');
 
-        switch ($page){
+        switch ($page) {
             case 'login':
                 break;
             case 'login_ok':
@@ -55,8 +54,7 @@ class UserController extends AppController
                     $_SESSION['username'] = $account->username;
                     $_SESSION['nickname'] = $account->nickname;
                 } catch(UserNotFoundException $e){
-
-                echo "error message";
+                    echo "error message";
                 }
                 break;
 
@@ -67,7 +65,7 @@ class UserController extends AppController
         $this->set(get_defined_vars());
         $this->render($page);
     }
-    /*
+    /**
      *User Logout
      */
     public function logout()
