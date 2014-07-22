@@ -21,18 +21,18 @@ class ThreadController extends AppController
         $page = Param::get('page_next', 'create');
 
         switch ($page) {
-        case 'create':
-            break;
-        case 'create_end':
-            $thread->title = Param::get('title');
-            $comment->username = Param::get('username');
-            $comment->body = Param::get('body');
+            case 'create':
+                break;
+            case 'create_end':
+                $thread->title = Param::get('title');
+                $comment->username = Param::get('username');
+                $comment->body = Param::get('body');
 
-            try {
-                $thread->create($comment);
-            } catch (ValidationException $e){
-                $page = 'create';
-            }
+                try {
+                    $thread->create($comment);
+                } catch (ValidationException $e){
+                    $page = 'create';
+                }
 
         default:
             throw new NotFoundException("{$page} is not found");
@@ -61,17 +61,17 @@ class ThreadController extends AppController
         $page = Param::get('page_next', 'write');
 
         switch ($page) {
-        case 'write':
-            break;
-        case 'write_end':
-            $comment->username = Param::get('username');
-            $comment->body = Param::get('body');
-            
-            try {
-                $thread->write($comment);
-            } catch (ValidationException $e) {
-                $page = 'write';
-            }
+            case 'write':
+                break;
+            case 'write_end':
+                $comment->username = Param::get('username');
+                $comment->body = Param::get('body');
+
+                try {
+                    $thread->write($comment);
+                } catch (ValidationException $e) {
+                    $page = 'write';
+                }
             
         default:
             throw new NotFoundException("{$page} is not found");
