@@ -39,23 +39,23 @@
 
     <label for='nickname'> Nick Name: </label>
     <input type='text' name='nickname' maxlength="10" 
-    value='<?php eh(Param::get("nickname"))?>'/>
+    value='<?php eh($nickname)?>'/>
       
     <label for='email'> Email Address:</label>
     <input type='text' name='email' maxlength="50" 
-    value='<?php eh(Param::get("email"))?>'/>
+    value='<?php eh($email)?>'/>
 
     <label for='username'> UserName:</label>
     <input type='text' name='username' maxlength="20" 
-    value='<?php eh(Param::get("username"))?>'/>
+    value='<?php eh($username)?>'/>
 
     <label for='password'> Password:</label>
     <input type='password' name='password' maxlength="20" 
-    value='<?php eh(Param::get("password"))?>'/>
+    value='<?php eh($password)?>'/>
 
     <label for='confpass'> Confirm Password:</label>
     <input type='password' name='confpass' maxlength="20" 
-    value='<?php eh(Param::get("confpass"))?>'/>
+    value='<?php eh($confpass)?>'/>
 
     <br/>
     <input type='submit' name='Submit' value='Submit' />
