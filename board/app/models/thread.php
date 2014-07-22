@@ -24,7 +24,7 @@ class Thread extends AppModel
      *Get all Threads
      *@return Threads
      */
-    public static function getAllThreads()
+    public static function getAll()
     {
         $threads = array();
         $limit = 'LIMIT ' . (Pagination::$current_page - 1) * Pagination::MAX_ROWS . ',' . Pagination::MAX_ROWS;
