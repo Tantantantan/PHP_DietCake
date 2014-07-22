@@ -40,13 +40,14 @@ class UserController extends AppController
     {
         $user = new User;
         $page = Param::get('next_page', 'login');
-
+        $trimpass = trim(Param::get('password'));
+        
         switch ($page) {
             case 'login':
                 break;
             case 'login_ok':
                 $user->username = Param::get('username');
-                $user->password = sha1(Param::get('password'));
+                $user->password = sha1($trimpass);
 
                 try {
                     $account = $user->checkLogin();
