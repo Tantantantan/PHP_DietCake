@@ -26,13 +26,11 @@ class CommentController extends Appcontroller
             case 'write_end':
                 $comment->username = Param::get('username');
                 $comment->body = Param::get('body');
-            
                 try {
                     $thread->write($comment);
                 } catch (ValidationException $e) {
                     $page = 'write';
                 }
-            
             default:
                 throw new NotFoundException("{$page} is not found");
                 break;
