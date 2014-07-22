@@ -19,12 +19,12 @@ class UserController extends AppController
                 $user->password = Param::get('password');
                 $user->confpass = Param::get('confpass');
 
-            try{
-                $user->register();
-            } catch (ValidationException $e){
-                $page = 'register';
-            }
-                break;
+                try{
+                    $user->register();
+                } catch (ValidationException $e){
+                    $page = 'register';
+                }
+                    break;
             
             default:
                 throw new NotFoundException("{$page} not found");
