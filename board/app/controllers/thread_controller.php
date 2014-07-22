@@ -27,13 +27,11 @@ class ThreadController extends AppController
                 $thread->title = Param::get('title');
                 $comment->username = Param::get('username');
                 $comment->body = Param::get('body');
-
                 try {
                     $thread->create($comment);
                 } catch (ValidationException $e){
                     $page = 'create';
                 }
-
         default:
             throw new NotFoundException("{$page} is not found");
             break;
@@ -66,16 +64,14 @@ class ThreadController extends AppController
             case 'write_end':
                 $comment->username = Param::get('username');
                 $comment->body = Param::get('body');
-
                 try {
                     $thread->write($comment);
                 } catch (ValidationException $e) {
                     $page = 'write';
                 }
-            
-        default:
-            throw new NotFoundException("{$page} is not found");
-            break;
+            default:
+                throw new NotFoundException("{$page} is not found");
+                break;
         }
         $this->set(get_defined_vars());
         $this->render($page);
