@@ -50,8 +50,7 @@ class User extends AppModel
             'password' => sha1($this->password), //sha1 mysql encription
             'email' => $this->email,
         );
-        
-        }
+    }
         $db = DB::conn();//storing to database    
         $db->insert('user', $input);
     }
