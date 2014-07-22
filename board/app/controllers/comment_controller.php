@@ -8,7 +8,6 @@ class CommentController extends Appcontroller
     {
         $thread = Thread::get(Param::get('thread_id'));
         $comments = $thread->getComments();
-
         $this->set(get_defined_vars());
     }
     /**
@@ -19,7 +18,7 @@ class CommentController extends Appcontroller
         $thread = Thread::get(Param::get('thread_id'));
         $comment = new Comment;
         $page = Param::get('page_next', 'write');
-
+        
         switch ($page) {
             case 'write':
                 break;
@@ -35,7 +34,6 @@ class CommentController extends Appcontroller
                 throw new NotFoundException("{$page} is not found");
                 break;
         }
-        
         $this->set(get_defined_vars());
         $this->render($page);
     }
