@@ -13,19 +13,19 @@ class User extends AppModel
         
         'nickname' => array(
             'length' => array(
-                'check_length', MIN_USER_LENGTH, MAX_USER_LENGTH
+                'validate_length', MIN_USER_LENGTH, MAX_USER_LENGTH
             ),
         ),
 
         'username' => array(
             'length' => array(
-                'check_length', MIN_USER_LENGTH, MAX_USER_LENGTH
+                'validate_length', MIN_USER_LENGTH, MAX_USER_LENGTH
             ),
         ),
 
         'password' => array(
             'length' => array(
-                'check_length', MIN_PASS_LENGTH, MAX_PASS_LENGTH
+                'validate_length', MIN_PASS_LENGTH, MAX_PASS_LENGTH
             ),
         ),
 
